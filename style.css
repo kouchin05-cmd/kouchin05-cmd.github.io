@@ -1,0 +1,102 @@
+:root{
+  --ink:#1d1a16;
+  --paper:#fbf6ea;
+  --muted:#6f665b;
+  --accent:#3a2a6f;
+  --gold:#c7a64b;
+  --shadow: 0 18px 60px rgba(0,0,0,.35);
+  --radius:18px;
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  font-family: ui-serif, "Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;
+  color: rgba(255,255,255,.92);
+  background:
+    radial-gradient(900px 500px at 15% 10%, rgba(58,42,111,.35), transparent 60%),
+    radial-gradient(900px 550px at 90% 0%, rgba(199,166,75,.22), transparent 55%),
+    #0f0f14;
+  min-height:100svh;
+}
+
+.wrap{
+  max-width:980px;
+  margin:0 auto;
+  padding:28px 16px 48px;
+}
+
+.hero{
+  text-align:center;
+  margin-top:8px;
+}
+
+.hero-img{
+  width:min(920px, 100%);
+  border-radius: 22px;
+  box-shadow: 0 0 50px rgba(199,166,75,.20);
+  border: 1px solid rgba(255,255,255,.10);
+}
+
+.title{
+  margin:18px 0 6px;
+  font-size:34px;
+  letter-spacing:.18em;
+}
+
+.subtitle{
+  margin:0 0 18px;
+  color: rgba(255,255,255,.78);
+  line-height:1.7;
+}
+
+.card{
+  margin: 18px auto 0;
+  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px 14px 14px;
+  backdrop-filter: blur(10px);
+}
+
+.card-title{
+  margin: 2px 0 12px;
+  font-size:14px;
+  letter-spacing:.10em;
+  color: rgba(255,255,255,.86);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap:12px;
+}
+
+.btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 12px 10px;
+  border-radius: 999px;
+  text-decoration:none;
+  color: rgba(255,255,255,.96);
+  background: linear-gradient(135deg, rgba(58,42,111,.95), rgba(199,166,75,.82));
+  border: 1px solid rgba(255,255,255,.15);
+  font-size:15px;
+  letter-spacing:.10em;
+  transition: transform .12s ease, opacity .12s ease;
+}
+
+.btn:hover{ transform: translateY(-1px); opacity:.95; }
+
+.note{
+  margin: 12px 2px 0;
+  font-size:12px;
+  color: rgba(255,255,255,.68);
+  line-height:1.7;
+}
+
+@media (min-width: 760px){
+  .grid{ grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
