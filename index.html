@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>兆しの書院｜鑑定開始</title>
+
+<style>
+:root{
+  --bg1:#2b2250;
+  --bg2:#0d0c14;
+  --gold:#c7a64b;
+}
+*{box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  margin:0;
+  font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;
+  color:#fff;
+  background: radial-gradient(circle at center,var(--bg1),var(--bg2));
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+.container{
+  padding:24px 16px 8px;
+  max-width:960px;
+  width:100%;
+}
+.hero-img{
+  width:min(92%, 820px);
+  height:auto;
+  border-radius:22px;
+  box-shadow:0 0 45px rgba(255,215,0,.55);
+  margin-bottom:22px;
+  border:1px solid rgba(255,255,255,.08);
+}
+h1{
+  margin:0 0 10px;
+  font-size:34px;
+  letter-spacing:.18em;
+}
+.subtitle{
+  margin:0 0 36px;
+  opacity:.85;
+}
+.start-button{
+  display:inline-block;
+  padding:16px 38px;
+  background:linear-gradient(135deg,#3a2a6f,var(--gold));
+  border-radius:40px;
+  color:#fff;
+  text-decoration:none;
+  font-size:18px;
+  letter-spacing:.18em;
+  box-shadow:0 0 28px rgba(255,215,0,.6);
+  transition:transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+}
+.start-button:hover{
+  transform:translateY(-1px) scale(1.06);
+  box-shadow:0 0 40px rgba(255,215,0,.9);
+  opacity:.98;
+}
+footer{
+  margin-top:auto;
+  padding:20px 12px 18px;
+  font-size:12px;
+  opacity:.65;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- ここが画像読み込み：リポジトリ直下の title.png -->
+  <img src="title.png" alt="兆しの書院" class="hero-img">
+
+  <h1>兆しの書院</h1>
+  <p class="subtitle">月と星の導きによる特別鑑定</p>
+
+  <a href="https://lin.ee/nTbmE2A?openExternalBrowser=1"
+     class="start-button"
+     target="_blank"
+     rel="noopener">
+     鑑定開始
+  </a>
+
+</div>
+
+<footer>
+  © 2026 kizashinoshoko
+</footer>
+
+</body>
+</html>
