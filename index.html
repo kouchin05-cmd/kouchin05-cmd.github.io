@@ -1,99 +1,323 @@
 <!doctype html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>兆しの書院｜鑑定開始</title>
-
-<style>
-:root{
-  --bg1:#2b2250;
-  --bg2:#0d0c14;
-  --gold:#c7a64b;
-}
-*{box-sizing:border-box;}
-html,body{height:100%;}
-body{
-  margin:0;
-  font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;
-  color:#fff;
-  background: radial-gradient(circle at center,var(--bg1),var(--bg2));
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-}
-.container{
-  padding:24px 16px 8px;
-  max-width:960px;
-  width:100%;
-}
-.hero-img{
-  width:min(92%, 820px);
-  height:auto;
-  border-radius:22px;
-  box-shadow:0 0 45px rgba(255,215,0,.55);
-  margin-bottom:22px;
-  border:1px solid rgba(255,255,255,.08);
-}
-h1{
-  margin:0 0 10px;
-  font-size:34px;
-  letter-spacing:.18em;
-}
-.subtitle{
-  margin:0 0 36px;
-  opacity:.85;
-}
-.start-button{
-  display:inline-block;
-  padding:16px 38px;
-  background:linear-gradient(135deg,#3a2a6f,var(--gold));
-  border-radius:40px;
-  color:#fff;
-  text-decoration:none;
-  font-size:18px;
-  letter-spacing:.18em;
-  box-shadow:0 0 28px rgba(255,215,0,.6);
-  transition:transform .15s ease, box-shadow .15s ease, opacity .15s ease;
-}
-.start-button:hover{
-  transform:translateY(-1px) scale(1.06);
-  box-shadow:0 0 40px rgba(255,215,0,.9);
-  opacity:.98;
-}
-footer{
-  margin-top:auto;
-  padding:20px 12px 18px;
-  font-size:12px;
-  opacity:.65;
-}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>兆しの書院｜AI自己分析レポート</title>
+  <meta name="description" content="AIを活用したエンターテインメント目的の自己分析レポート。入力からレポートを生成してお届けします。" />
+  <meta name="robots" content="index,follow" />
+  <style>
+    :root{
+      --bg1:#0b0f1a;
+      --bg2:#121a2b;
+      --card: rgba(255,255,255,.08);
+      --card2: rgba(255,255,255,.06);
+      --line: rgba(255,255,255,.16);
+      --txt: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --muted2: rgba(255,255,255,.62);
+      --accent: rgba(200, 220, 255, .95);
+      --shadow: 0 12px 40px rgba(0,0,0,.45);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      color:var(--txt);
+      font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans JP",sans-serif;
+      background:
+        radial-gradient(900px 480px at 18% 18%, rgba(140,170,255,.18), transparent 58%),
+        radial-gradient(800px 520px at 78% 28%, rgba(200,160,255,.14), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+    }
+    a{color:inherit}
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px 18px 40px;
+    }
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:18px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      letter-spacing:.06em;
+    }
+    .badge{
+      width:38px;height:38px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background: linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,.04));
+      display:grid;
+      place-items:center;
+      box-shadow: var(--shadow);
+      flex: 0 0 auto;
+    }
+    .badge span{font-size:18px; opacity:.95}
+    .brand .t1{font-weight:760}
+    .brand .t2{font-size:12px; color:var(--muted); margin-top:2px}
+    .toplinks{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .pill{
+      font-size:12px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      text-decoration:none;
+      color: var(--muted);
+    }
+    .pill:hover{color:var(--txt); background: rgba(255,255,255,.06)}
+    main{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 14px;
+      align-items:stretch;
+      margin-top: 14px;
+    }
+    @media (max-width: 860px){
+      main{grid-template-columns:1fr}
+    }
+    .card{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      box-shadow: var(--shadow);
+      padding: 20px;
+      overflow:hidden;
+    }
+    h1{
+      margin:0 0 10px;
+      font-size: 30px;
+      letter-spacing:.02em;
+      line-height:1.2;
+    }
+    .lead{
+      margin:0 0 16px;
+      color: var(--muted);
+      line-height:1.75;
+      font-size: 14.5px;
+    }
+    .ctaRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 14px;
+    }
+    .btn{
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      padding: 12px 14px;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-weight:680;
+      letter-spacing:.02em;
+      background: rgba(255,255,255,.06);
+      color: var(--txt);
+    }
+    .btn:hover{background: rgba(255,255,255,.09)}
+    .btn.primary{
+      background: rgba(200,220,255,.12);
+      border-color: rgba(200,220,255,.35);
+    }
+    .btn.primary:hover{background: rgba(200,220,255,.16)}
+    .small{
+      font-size:12px;
+      color: var(--muted2);
+      line-height:1.6;
+      margin-top: 10px;
+    }
+    .grid2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top: 12px;
+    }
+    @media (max-width: 520px){
+      .grid2{grid-template-columns:1fr}
+    }
+    .mini{
+      border:1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      background: rgba(255,255,255,.04);
+    }
+    .mini .k{font-size:12px; color: var(--muted2); margin-bottom:6px}
+    .mini .v{font-size:14px; color: var(--txt); line-height:1.65}
+    .rightTitle{
+      font-size: 14px;
+      letter-spacing:.06em;
+      color: var(--muted);
+      margin:0 0 10px;
+    }
+    .steps{
+      margin:0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height:1.8;
+      font-size: 14px;
+    }
+    .hr{
+      height:1px;
+      background: rgba(255,255,255,.12);
+      margin: 16px 0;
+    }
+    footer.legal{
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.12);
+      font-size: 12px;
+      color: var(--muted2);
+      line-height: 1.7;
+    }
+    .legal nav{
+      margin-top: 8px;
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .legal nav a{
+      color: var(--muted);
+      text-decoration: underline;
+    }
+    .legal nav a:hover{color:var(--txt)}
+    .copy{margin-top: 10px; opacity:.75}
+    .notice{
+      font-size: 12px;
+      color: var(--muted2);
+      margin-top: 10px;
+      border-left: 3px solid rgba(200,220,255,.35);
+      padding-left: 10px;
+    }
+  </style>
 </head>
 
 <body>
+  <div class="wrap">
 
-<div class="container">
+    <header>
+      <div class="brand">
+        <div class="badge" aria-hidden="true"><span>🌙</span></div>
+        <div>
+          <div class="t1">兆しの書院</div>
+          <div class="t2">AI自己分析レポート（エンターテインメント）</div>
+        </div>
+      </div>
 
-  <!-- ここが画像読み込み：リポジトリ直下の title.png -->
-  <img src="title.png" alt="兆しの書院" class="hero-img">
+      <div class="toplinks">
+        <a class="pill" href="./legal/tokusho.html">特商法</a>
+        <a class="pill" href="./legal/terms.html">利用規約</a>
+        <a class="pill" href="./legal/privacy.html">プライバシー</a>
+        <a class="pill" href="./legal/refund.html">返金</a>
+      </div>
+    </header>
 
-  <h1>兆しの書院</h1>
-  <p class="subtitle">月と星の導きによる特別鑑定</p>
+    <main>
+      <!-- Left -->
+      <section class="card">
+        <h1>月と星の“兆し”から、あなたの傾向を読み解く。</h1>
+        <p class="lead">
+          本サービスは、入力内容をもとに <b>AIが自己分析レポート（PDF等）</b> を生成してお届けする、
+          エンターテインメント目的のデジタルコンテンツです。
+        </p>
 
-  <a href="https://lin.ee/nTbmE2A?openExternalBrowser=1"
-     class="start-button"
-     target="_blank"
-     rel="noopener">
-     鑑定開始
-  </a>
+        <div class="ctaRow">
+          <!-- ✅ ここに今のLINEの導線を入れる -->
+          <a class="btn primary" href="https://lin.ee/XXXXXXXXXXXX" target="_blank" rel="noopener noreferrer">
+            鑑定開始（LINEへ）
+            <span aria-hidden="true">→</span>
+          </a>
 
-</div>
+          <a class="btn" href="./legal/tokusho.html">
+            ご利用前に確認
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
 
-<footer>
-  © 2026 kizashinoshoko
-</footer>
+        <p class="notice">
+          ※ Stripe等の審査向けに、サイト上の表現は「AI自己分析レポート（エンタメ）」として記載しています。<br>
+          「占い・未来予知・霊視」等の超常的行為を提供するものではありません。
+        </p>
 
+        <div class="hr"></div>
+
+        <div class="grid2">
+          <div class="mini">
+            <div class="k">価格</div>
+            <div class="v">1レポート <b>980円（税込）</b></div>
+          </div>
+          <div class="mini">
+            <div class="k">提供形式</div>
+            <div class="v">デジタルコンテンツ（PDF等）</div>
+          </div>
+          <div class="mini">
+            <div class="k">提供タイミング</div>
+            <div class="v">決済確認後、即時〜24時間以内</div>
+          </div>
+          <div class="mini">
+            <div class="k">返金</div>
+            <div class="v">原則不可（重複決済等は対応）</div>
+          </div>
+        </div>
+
+        <p class="small">
+          ※購入・決済フローは現在LINE導線で運用中の場合でも問題ありません（サイトは“運営実在性”と“ポリシー表示”が主目的）。
+        </p>
+
+        <footer class="legal">
+          <div>
+            <b>免責</b>：本サービスはエンターテインメント目的のデジタルコンテンツです。医療・法律・投資等の専門的助言は行いません。
+            特定の結果・効果を保証するものではありません。
+          </div>
+          <nav>
+            <a href="./legal/tokusho.html">特定商取引法に基づく表記</a>
+            <a href="./legal/terms.html">利用規約</a>
+            <a href="./legal/privacy.html">プライバシーポリシー</a>
+            <a href="./legal/refund.html">返金ポリシー</a>
+          </nav>
+          <div class="copy">© 2026 兆しの書院</div>
+        </footer>
+      </section>
+
+      <!-- Right -->
+      <aside class="card">
+        <p class="rightTitle">使い方</p>
+        <ol class="steps">
+          <li>LINEへ移動して案内に沿って入力</li>
+          <li>内容をもとにAIが分析</li>
+          <li>自己分析レポート（PDF等）を受け取る</li>
+        </ol>
+
+        <div class="hr"></div>
+
+        <p class="rightTitle">安心のために</p>
+        <ul class="steps" style="padding-left:18px;">
+          <li>ポリシー（特商法/規約/プライバシー/返金）を公開</li>
+          <li>連絡窓口（メール）を明記</li>
+          <li>エンタメ目的・非保証を明記</li>
+        </ul>
+
+        <p class="small">
+          ※「鑑定開始」ボタンのURL（lin.ee/〜）だけ、あなたの実URLに置き換えてね。
+        </p>
+      </aside>
+    </main>
+  </div>
+
+  <!-- https://lin.ee/7IzWhwf -->
+  <!-- 例）https://lin.ee/abc123 -->
 </body>
 </html>
