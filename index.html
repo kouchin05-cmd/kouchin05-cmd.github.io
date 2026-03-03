@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>兆しの書院｜鑑定開始</title>
+<title>兆しの書院｜無料鑑定開始</title>
 
 <style>
 :root{
@@ -43,30 +43,56 @@ h1{
   letter-spacing:.18em;
 }
 .subtitle{
-  margin:0 0 28px;
+  margin:0 0 32px;
   opacity:.85;
 }
-.start-button{
+
+/* 🌙 神秘ボタン */
+.mystic-button{
   display:inline-block;
-  padding:16px 38px;
-  background:linear-gradient(135deg,#3a2a6f,var(--gold));
-  border-radius:40px;
-  color:#fff;
+  padding:24px 70px;
+  font-size:24px;
+  letter-spacing:.22em;
   text-decoration:none;
-  font-size:18px;
-  letter-spacing:.18em;
-  box-shadow:0 0 28px rgba(255,215,0,.6);
-  transition:transform .15s ease, box-shadow .15s ease, opacity .15s ease;
-}
-.start-button:hover{
-  transform:translateY(-1px) scale(1.06);
-  box-shadow:0 0 40px rgba(255,215,0,.9);
-  opacity:.98;
+  color:#fff;
+  border-radius:60px;
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(135deg,#3b2b73,#c7a64b);
+  box-shadow:
+    0 0 30px rgba(255,215,0,.7),
+    0 0 60px rgba(199,166,75,.4);
+  transition:all .25s ease;
 }
 
-/* 追加：フッター内のリンクだけ、控えめに */
+/* 光のオーラ */
+.mystic-button::before{
+  content:"";
+  position:absolute;
+  top:-50%;
+  left:-50%;
+  width:200%;
+  height:200%;
+  background:radial-gradient(circle, rgba(255,255,255,.25) 0%, transparent 60%);
+  transform:rotate(25deg);
+  opacity:.6;
+  transition:opacity .3s;
+}
+
+.mystic-button:hover{
+  transform:scale(1.08);
+  box-shadow:
+    0 0 45px rgba(255,215,0,.95),
+    0 0 90px rgba(199,166,75,.6);
+}
+
+.mystic-button:hover::before{
+  opacity:.9;
+}
+
+/* フッター */
 .legal{
-  margin-top:10px;
+  margin-top:14px;
   font-size:12px;
   opacity:.72;
   line-height:1.7;
@@ -75,10 +101,7 @@ h1{
   color:inherit;
   text-decoration:underline;
   text-underline-offset:3px;
-  opacity:.9;
 }
-.legal a:hover{opacity:1;}
-
 footer{
   margin-top:auto;
   padding:18px 12px 16px;
@@ -92,20 +115,20 @@ footer{
 
 <div class="container">
 
-  <!-- リポジトリ直下の title.png -->
+  <!-- title.png はリポジトリ直下 -->
   <img src="title.png" alt="兆しの書院" class="hero-img">
 
   <h1>兆しの書院</h1>
 
-  <!-- 変更：雰囲気は残しつつ “自己分析レポート（エンタメ）” 寄せ -->
-  <p class="subtitle">月と星の兆しから紐解く、エンターテインメント自己分析レポート</p>
+  <p class="subtitle">
+    月と星の兆しから紐解く、エンターテインメント自己分析レポート
+  </p>
 
-  <!-- 変更：LINEリンクを指定のものに -->
   <a href="https://lin.ee/7IzWhwf"
-     class="start-button"
+     class="mystic-button"
      target="_blank"
      rel="noopener">
-     鑑定開始
+     ✧ 無料鑑定開始 ✧
   </a>
 
 </div>
@@ -119,9 +142,8 @@ footer{
     <a href="./legal/privacy.html">プライバシーポリシー</a> /
     <a href="./legal/refund.html">返金ポリシー</a>
   </div>
-  <div style="margin-top:10px;">© 2026 kizashinoshoin</div>
+  <div style="margin-top:10px;">© 2026 kizashinoshoko</div>
 </footer>
 
 </body>
 </html>
-
