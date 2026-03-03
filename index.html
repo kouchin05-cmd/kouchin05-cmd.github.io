@@ -1,445 +1,126 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>兆しの書院｜AI自己分析レポート</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>兆しの書院｜鑑定開始</title>
 
-  <meta name="description" content="AIを活用したエンターテインメント目的の自己分析レポート。入力からレポートを生成してお届けします。" />
-  <meta name="robots" content="index,follow" />
+<style>
+:root{
+  --bg1:#2b2250;
+  --bg2:#0d0c14;
+  --gold:#c7a64b;
+}
+*{box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  margin:0;
+  font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;
+  color:#fff;
+  background: radial-gradient(circle at center,var(--bg1),var(--bg2));
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+.container{
+  padding:24px 16px 8px;
+  max-width:960px;
+  width:100%;
+}
+.hero-img{
+  width:min(92%, 820px);
+  height:auto;
+  border-radius:22px;
+  box-shadow:0 0 45px rgba(255,215,0,.55);
+  margin-bottom:22px;
+  border:1px solid rgba(255,255,255,.08);
+}
+h1{
+  margin:0 0 10px;
+  font-size:34px;
+  letter-spacing:.18em;
+}
+.subtitle{
+  margin:0 0 28px;
+  opacity:.85;
+}
+.start-button{
+  display:inline-block;
+  padding:16px 38px;
+  background:linear-gradient(135deg,#3a2a6f,var(--gold));
+  border-radius:40px;
+  color:#fff;
+  text-decoration:none;
+  font-size:18px;
+  letter-spacing:.18em;
+  box-shadow:0 0 28px rgba(255,215,0,.6);
+  transition:transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+}
+.start-button:hover{
+  transform:translateY(-1px) scale(1.06);
+  box-shadow:0 0 40px rgba(255,215,0,.9);
+  opacity:.98;
+}
 
-  <!-- title.png をアイコンとしても利用（なくてもOK） -->
-  <link rel="icon" href="./title.png" />
+/* 追加：フッター内のリンクだけ、控えめに */
+.legal{
+  margin-top:10px;
+  font-size:12px;
+  opacity:.72;
+  line-height:1.7;
+}
+.legal a{
+  color:inherit;
+  text-decoration:underline;
+  text-underline-offset:3px;
+  opacity:.9;
+}
+.legal a:hover{opacity:1;}
 
-  <style>
-    :root{
-      --bg0:#070A12;
-      --bg1:#0B1020;
-      --bg2:#0E162A;
-
-      --card: rgba(255,255,255,.06);
-      --card2: rgba(255,255,255,.04);
-      --line: rgba(255,255,255,.14);
-
-      --txt: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.70);
-      --muted2: rgba(255,255,255,.58);
-
-      --glowA: rgba(170,210,255,.18);
-      --glowB: rgba(200,160,255,.14);
-
-      --radius: 18px;
-      --shadow: 0 14px 44px rgba(0,0,0,.55);
-    }
-
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      color:var(--txt);
-      font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
-      background:
-        radial-gradient(900px 540px at 18% 12%, var(--glowA), transparent 62%),
-        radial-gradient(820px 560px at 82% 22%, var(--glowB), transparent 60%),
-        linear-gradient(180deg, var(--bg0), var(--bg1) 45%, var(--bg2));
-    }
-
-    a{color:inherit}
-    .wrap{
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 28px 18px 44px;
-    }
-
-    header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      margin-bottom: 16px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      min-width: 0;
-    }
-
-    .brandLogo{
-      height: 34px;
-      width: auto;
-      display:block;
-      filter: drop-shadow(0 10px 24px rgba(0,0,0,.45));
-      opacity:.96;
-    }
-
-    .brandText{
-      display:flex;
-      flex-direction:column;
-      gap:2px;
-      min-width: 0;
-    }
-    .brandName{
-      font-weight:760;
-      letter-spacing:.06em;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-    .brandSub{
-      font-size:12px;
-      color:var(--muted);
-      letter-spacing:.06em;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-
-    .toplinks{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-    .pill{
-      font-size:12px;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      text-decoration:none;
-      color: var(--muted);
-      transition: .15s ease;
-    }
-    .pill:hover{
-      color: var(--txt);
-      background: rgba(255,255,255,.05);
-      border-color: rgba(255,255,255,.22);
-    }
-
-    main{
-      display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 14px;
-      align-items:stretch;
-      margin-top: 14px;
-    }
-    @media (max-width: 860px){
-      main{grid-template-columns:1fr}
-    }
-
-    .card{
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      background: linear-gradient(180deg, var(--card), var(--card2));
-      box-shadow: var(--shadow);
-      padding: 20px;
-      overflow:hidden;
-      position:relative;
-    }
-
-    /* さりげない星屑 */
-    .card::before{
-      content:"";
-      position:absolute;
-      inset:-40px -40px auto auto;
-      width: 260px;
-      height: 260px;
-      background: radial-gradient(circle at 30% 35%, rgba(255,255,255,.14), transparent 55%);
-      opacity:.35;
-      transform: rotate(18deg);
-      pointer-events:none;
-    }
-
-    h1{
-      margin:0 0 10px;
-      font-size: 30px;
-      line-height:1.18;
-      letter-spacing:.02em;
-    }
-    .lead{
-      margin:0 0 16px;
-      color: var(--muted);
-      line-height:1.85;
-      font-size: 14.5px;
-    }
-
-    .heroTitle{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      margin-bottom: 10px;
-    }
-
-    .heroMark{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      color: var(--muted);
-      font-size: 12px;
-      letter-spacing:.12em;
-      text-transform: uppercase;
-    }
-    .dot{
-      width:6px;height:6px;border-radius:999px;
-      background: rgba(200,220,255,.55);
-      box-shadow: 0 0 18px rgba(200,220,255,.35);
-      display:inline-block;
-    }
-
-    .ctaRow{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top: 14px;
-    }
-
-    .btn{
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      padding: 12px 14px;
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      font-weight:720;
-      letter-spacing:.02em;
-      background: rgba(255,255,255,.04);
-      color: var(--txt);
-      transition: .15s ease;
-    }
-    .btn:hover{
-      background: rgba(255,255,255,.07);
-      border-color: rgba(255,255,255,.22);
-    }
-
-    .btn.primary{
-      background: rgba(170,210,255,.10);
-      border-color: rgba(170,210,255,.30);
-    }
-    .btn.primary:hover{
-      background: rgba(170,210,255,.14);
-      border-color: rgba(170,210,255,.40);
-    }
-
-    .notice{
-      margin-top: 12px;
-      font-size: 12px;
-      color: var(--muted2);
-      line-height: 1.75;
-      border-left: 3px solid rgba(170,210,255,.30);
-      padding-left: 10px;
-    }
-
-    .hr{
-      height:1px;
-      background: rgba(255,255,255,.10);
-      margin: 16px 0;
-    }
-
-    .grid2{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
-      margin-top: 12px;
-    }
-    @media (max-width: 520px){
-      .grid2{grid-template-columns:1fr}
-    }
-
-    .mini{
-      border:1px solid rgba(255,255,255,.12);
-      border-radius: 14px;
-      padding: 12px;
-      background: rgba(255,255,255,.03);
-    }
-    .mini .k{
-      font-size:12px;
-      color: var(--muted2);
-      margin-bottom:6px;
-      letter-spacing:.08em;
-    }
-    .mini .v{
-      font-size:14px;
-      color: var(--txt);
-      line-height:1.65;
-    }
-
-    .sideTitle{
-      font-size: 12px;
-      color: var(--muted);
-      letter-spacing:.14em;
-      margin:0 0 10px;
-      text-transform: uppercase;
-    }
-
-    .steps{
-      margin:0;
-      padding-left: 18px;
-      color: var(--muted);
-      line-height:1.9;
-      font-size: 14px;
-    }
-
-    footer.legal{
-      margin-top: 18px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(255,255,255,.10);
-      font-size: 12px;
-      color: var(--muted2);
-      line-height: 1.75;
-    }
-    .legal nav{
-      margin-top: 8px;
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-    }
-    .legal nav a{
-      color: var(--muted);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      transition:.15s ease;
-    }
-    .legal nav a:hover{color:var(--txt)}
-    .copy{margin-top: 10px; opacity:.75}
-
-    /* title.pngを中央にさりげなく（背景に薄く） */
-    .titleGhost{
-      position:absolute;
-      right:-10px;
-      bottom:-24px;
-      width: 320px;
-      max-width: 55%;
-      opacity: .08;
-      filter: blur(.2px);
-      pointer-events:none;
-      user-select:none;
-    }
-  </style>
+footer{
+  margin-top:auto;
+  padding:18px 12px 16px;
+  font-size:12px;
+  opacity:.65;
+}
+</style>
 </head>
 
 <body>
-  <div class="wrap">
 
-    <header>
-      <div class="brand">
-        <img class="brandLogo" src="./title.png" alt="兆しの書院" />
-        <div class="brandText">
-          <div class="brandName">兆しの書院</div>
-          <div class="brandSub">AI自己分析レポート（エンターテインメント）</div>
-        </div>
-      </div>
+<div class="container">
 
-      <div class="toplinks">
-        <a class="pill" href="./legal/tokusho.html">特商法</a>
-        <a class="pill" href="./legal/terms.html">利用規約</a>
-        <a class="pill" href="./legal/privacy.html">プライバシー</a>
-        <a class="pill" href="./legal/refund.html">返金</a>
-      </div>
-    </header>
+  <!-- リポジトリ直下の title.png -->
+  <img src="title.png" alt="兆しの書院" class="hero-img">
 
-    <main>
-      <!-- Left -->
-      <section class="card">
-        <img class="titleGhost" src="./title.png" alt="" aria-hidden="true" />
+  <h1>兆しの書院</h1>
 
-        <div class="heroTitle">
-          <div class="heroMark"><span class="dot" aria-hidden="true"></span> subtle guidance</div>
-          <h1>静かな月明かりの下で、あなたの傾向を読み解く。</h1>
-        </div>
+  <!-- 変更：雰囲気は残しつつ “自己分析レポート（エンタメ）” 寄せ -->
+  <p class="subtitle">月と星の兆しから紐解く、エンターテインメント自己分析レポート</p>
 
-        <p class="lead">
-          本サービスは、入力内容をもとに <b>AIが自己分析レポート（PDF等）</b> を生成してお届けする、
-          エンターテインメント目的のデジタルコンテンツです。
-        </p>
+  <!-- 変更：LINEリンクを指定のものに -->
+  <a href="https://lin.ee/7IzWhwf"
+     class="start-button"
+     target="_blank"
+     rel="noopener">
+     鑑定開始
+  </a>
 
-        <div class="ctaRow">
-          <a class="btn primary" href="https://lin.ee/7IzWhwf" target="_blank" rel="noopener noreferrer">
-            鑑定開始（LINEへ）
-            <span aria-hidden="true">→</span>
-          </a>
+</div>
 
-          <a class="btn" href="./legal/tokusho.html">
-            ご利用前に確認
-            <span aria-hidden="true">↗</span>
-          </a>
-        </div>
-
-        <div class="notice">
-          ※本サービスはエンターテインメント目的のデジタルコンテンツです。医療・法律・投資等の専門的助言は行いません。<br>
-          占い・未来予知・霊視等の超常的行為を提供するものではなく、特定の結果・効果を保証しません。
-        </div>
-
-        <div class="hr"></div>
-
-        <div class="grid2">
-          <div class="mini">
-            <div class="k">価格</div>
-            <div class="v">1レポート <b>980円（税込）</b></div>
-          </div>
-          <div class="mini">
-            <div class="k">提供形式</div>
-            <div class="v">デジタルコンテンツ（PDF等）</div>
-          </div>
-          <div class="mini">
-            <div class="k">提供タイミング</div>
-            <div class="v">決済確認後、即時〜24時間以内</div>
-          </div>
-          <div class="mini">
-            <div class="k">返金</div>
-            <div class="v">原則不可（重複決済等は対応）</div>
-          </div>
-        </div>
-
-        <footer class="legal">
-          <div>
-            <b>免責</b>：本サービスはエンターテインメント目的のデジタルコンテンツです。医療・法律・投資等の専門的助言は行いません。
-            特定の結果・効果を保証するものではありません。
-          </div>
-          <nav>
-            <a href="./legal/tokusho.html">特定商取引法に基づく表記</a>
-            <a href="./legal/terms.html">利用規約</a>
-            <a href="./legal/privacy.html">プライバシーポリシー</a>
-            <a href="./legal/refund.html">返金ポリシー</a>
-          </nav>
-          <div class="copy">© 2026 兆しの書院</div>
-        </footer>
-      </section>
-
-      <!-- Right -->
-      <aside class="card">
-        <p class="sideTitle">How it works</p>
-        <ol class="steps">
-          <li>LINEへ移動して案内に沿って入力</li>
-          <li>内容をもとにAIが分析</li>
-          <li>自己分析レポート（PDF等）を受け取る</li>
-        </ol>
-
-        <div class="hr"></div>
-
-        <p class="sideTitle">For trust</p>
-        <ul class="steps" style="padding-left:18px;">
-          <li>特商法／規約／プライバシー／返金を公開</li>
-          <li>連絡窓口（メール）を明記</li>
-          <li>エンタメ目的・非保証を明記</li>
-        </ul>
-
-        <div class="hr"></div>
-
-        <p class="sideTitle">Links</p>
-        <div class="ctaRow">
-          <a class="btn" href="https://lin.ee/7IzWhwf" target="_blank" rel="noopener noreferrer">LINEへ</a>
-          <a class="btn" href="./legal/privacy.html">プライバシー</a>
-        </div>
-
-        <p style="margin:12px 0 0; font-size:12px; color:var(--muted2); line-height:1.7;">
-          ※「title.png」が表示されない場合は、ファイル名の大文字小文字・置き場所（直下）を確認してね。
-        </p>
-      </aside>
-    </main>
-
+<footer>
+  <div class="legal">
+    ※本サービスはエンターテインメント目的のデジタルコンテンツ（自己分析レポート等）です。<br>
+    医療・法律・投資等の専門的助言は行いません。特定の結果・効果を保証しません。<br>
+    <a href="./legal/tokusho.html">特定商取引法に基づく表記</a> /
+    <a href="./legal/terms.html">利用規約</a> /
+    <a href="./legal/privacy.html">プライバシーポリシー</a> /
+    <a href="./legal/refund.html">返金ポリシー</a>
   </div>
+  <div style="margin-top:10px;">© 2026 kizashinoshoko</div>
+</footer>
+
 </body>
 </html>
